@@ -96,8 +96,8 @@ button {
 </div>
 
 <div class="buttons">
-    <button onclick="kirim('Siapa kamu?')">Siapa kamu?</button>
-    <button onclick="kirim('Apa kabar?')">Apa kabar?</button>
+    <button onclick="kirim('Dimana kita dapat melapor?')">Dimana kita dapat melapor?</button>
+    <button onclick="kirim('Hukum pidana apa yang didapat pelaku?')">Hukum pidana apa yang didapat pelaku?</button>
     <button onclick="kirim('Apa hobi kamu?')">Apa hobi kamu?</button>
 </div>
 
@@ -125,10 +125,10 @@ function kirim(pesan) {
         let bot = document.createElement("div");
         bot.className = "bot";
 
-        if (pesan === "Siapa kamu?") {
-            bot.innerText = "Aku chatbot 😄";
-        } else if (pesan === "Apa kabar?") {
-            bot.innerText = "Aku baik!";
+        if (pesan === "Dimana kita dapat melapor?") {
+            bot.innerText = "Disana.";
+        } else if (pesan === "Hukum pidana apa yang didapat pelaku?") {
+            bot.innerText = "Hukuman.";
         } else if (pesan === "Apa hobi kamu?") {
             bot.innerText = "Aku suka coding!";
         }
