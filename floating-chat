@@ -40,7 +40,7 @@ body {
 
 <div id="btn" onclick="toggle()">💬</div>
 
-<iframe id="frame" src="https://allansori.github.io/chatbot-dpsh/"></iframe>
+<iframe id="frame" src="https://allansori.github.io/chatbot-dpsh/index.html"></iframe>
 
 <script>
 function toggle() {
