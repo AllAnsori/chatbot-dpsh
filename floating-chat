@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  margin: 0;
+}
+
+/* tombol icon */
+#btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #0b3d91;
+  color: white;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+/* iframe chatbot */
+#frame {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 320px;
+  height: 450px;
+  border: none;
+  display: none;
+}
+</style>
+</head>
+
+<body>
+
+<div id="btn" onclick="toggle()">💬</div>
+
+<iframe id="frame" src="https://allansori.github.io/chatbot-dpsh/"></iframe>
+
+<script>
+function toggle() {
+  let f = document.getElementById("frame");
+  f.style.display = f.style.display === "none" ? "block" : "none";
+}
+</script>
+
+</body>
+</html>
