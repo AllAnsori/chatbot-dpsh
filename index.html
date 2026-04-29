@@ -1,1 +1,127 @@
+<!DOCTYPE html><html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Escape Room Advanced</title>
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+  text-align: center;
+}.container { padding: 20px; }
 
+.card { background: rgba(0,0,0,0.6); border-radius: 15px; padding: 20px; margin: 20px auto; max-width: 500px; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+
+button { display: block; width: 100%; margin: 10px 0; padding: 12px; border: none; border-radius: 10px; background: #00c6ff; color: black; font-weight: bold; cursor: pointer; transition: 0.3s; }
+
+button:hover { background: #0072ff; color: white; }
+
+h1 { margin-top: 20px; }
+
+.inventory { margin-top: 10px; font-size: 14px; color: #ccc; } </style>
+
+</head>
+<body><h1>🕵️ Escape Room</h1>
+<div class="container">
+  <div class="card">
+    <p id="story"></p>
+    <div id="choices"></div>
+    <div class="inventory" id="inventory"></div>
+  </div>
+</div><script>
+let inventory = [];
+
+function updateInventory() {
+  document.getElementById("inventory").innerText =
+    "Inventory: " + (inventory.length ? inventory.join(", ") : "Kosong");
+}
+
+function render(text, options) {
+  document.getElementById("story").innerText = text;
+  const choices = document.getElementById("choices");
+  choices.innerHTML = "";
+
+  options.forEach(opt => {
+    const btn = document.createElement("button");
+    btn.innerText = opt.text;
+    btn.onclick = opt.action;
+    choices.appendChild(btn);
+  });
+
+  updateInventory();
+}
+
+// ROOMS
+function start() {
+  render("Kamu bangun di ruangan misterius. Ada 3 pintu.", [
+    { text: "Masuk Ruang Merah", action: redRoom },
+    { text: "Masuk Ruang Biru", action: blueRoom },
+    { text: "Masuk Ruang Hijau", action: greenRoom }
+  ]);
+}
+
+function redRoom() {
+  render("Ruang merah gelap. Ada kotak terkunci.", [
+    { text: "Buka kotak", action: () => {
+        if (!inventory.includes("Kunci")) {
+          alert("Butuh kunci!");
+        } else {
+          alert("Kamu menemukan kode: 123");
+        }
+      }
+    },
+    { text: "Kembali", action: start }
+  ]);
+}
+
+function blueRoom() {
+  render("Ruang biru dingin. Ada kunci di meja.", [
+    { text: "Ambil kunci", action: () => {
+        if (!inventory.includes("Kunci")) {
+          inventory.push("Kunci");
+          alert("Kunci didapat!");
+        }
+        blueRoom();
+      }
+    },
+    { text: "Masuk pintu rahasia", action: secretRoom },
+    { text: "Kembali", action: start }
+  ]);
+}
+
+function greenRoom() {
+  render("Ruang hijau penuh teka-teki: 5 x 3 = ?", [
+    { text: "Jawab 15", action: () => {
+        inventory.push("Kode");
+        alert("Kamu dapat kode!");
+        start();
+      }
+    },
+    { text: "Jawab 10", action: () => alert("Salah!") },
+    { text: "Kembali", action: start }
+  ]);
+}
+
+function secretRoom() {
+  render("Ruang rahasia! Ada pintu keluar.", [
+    { text: "Buka pintu", action: () => {
+        if (inventory.includes("Kode")) {
+          ending();
+        } else {
+          alert("Butuh kode!");
+        }
+      }
+    },
+    { text: "Kembali", action: blueRoom }
+  ]);
+}
+
+function ending() {
+  render("🎉 Kamu berhasil kabur dari semua ruangan!", []);
+}
+
+start();
+</script></body>
+</html>
